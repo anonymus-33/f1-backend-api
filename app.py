@@ -7,7 +7,7 @@ app = Flask(__name__)
 CORS(app)
 
 # Cacheamos los datos para no descargar lo mismo cada vez
-fastf1.Cache.enable_cache('cache') 
+# fastf1.Cache.enable_cache('cache') 
 
 @app.route('/api/pilotos', methods=['GET'])
 def get_pilotos():
