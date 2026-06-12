@@ -21,7 +21,7 @@ def index():
 def get_live_data():
     try:
         # Cargamos la sesión más reciente (2026)
-        session = fastf1.get_session(2026, 'latest', 'R')
+        session = fastf1.get_session(2025, 1, 'R')
         session.load()
         
         # Extraemos los datos necesarios para el Live Timing
