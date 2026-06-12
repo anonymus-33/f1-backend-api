@@ -17,20 +17,18 @@ def index():
     return render_template('f1.html')
 
 # Ruta de la API para obtener los datos de la sesión
-@app.route('/api/live-data', methods=['GET'])
-def get_live_data():
+@app.route('/api/live-data/<string:session_type>')
+def get_live_data(session_type):
     try:
-        # Cargamos la sesión más reciente (2026)
-        session = fastf1.get_session(2025, 1, 'R')
+        # Ahora session_type será 'FP1', 'FP2', 'Q' o 'R'
+        session = fastf1.get_session(2026, 'latest', session_type)
         session.load()
         
-        # Extraemos los datos necesarios para el Live Timing
-        # 'Abbreviation' es el código de 3 letras (ej: VER, HAM)
-        pilotos_data = session.results[['Position', 'Abbreviation', 'TeamName', 'FullName']].to_dict('records')
-        
-        return jsonify({"pilotos": pilotos_data})
+        # Obtenemos resultados. En prácticas, a veces no hay 'Position' exacta,
+        # así que usamos 'LapTime' o simplemente el orden de la tabla.
+        data = session.results[['Abbreviation', 'TeamName', 'FullName']].to_dict('records')
+        return jsonify({"pilotos": data})
     except Exception as e:
-        # Esto nos ayuda a ver qué falla exactamente en el navegador si hay error
         return jsonify({"error": str(e)}), 500
 
 if __name__ == '__main__':
