@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <title>F1 Live Timing</title>
+</head>
+<body>
+    <div class="dashboard">
+        <div class="timing-main">
+            <h1>Live Timing</h1>
+            <table id="tabla-pilotos">
+                <thead>
+                    <tr><th>Pos</th><th>Piloto</th><th>Equipo</th></tr>
+                </thead>
+                <tbody id="body-pilotos"></tbody>
+            </table>
+        </div>
+        <div class="sidebar">
+            <div class="box">Radio</div>
+            <div class="box">Noticias FIA</div>
+            <div class="box">Mapa</div>
+        </div>
+    </div>
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
